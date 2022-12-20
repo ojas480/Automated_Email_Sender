@@ -1,0 +1,25 @@
+function SendEmailList () {
+
+startRow = 2;
+endRow = 3;
+// maxNum = amount of rows in spread sheet
+
+while (startRow <= endRow) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet()
+  // replace 'Sheet 1' with sheet name
+  var sheet1=ss.getSheetByName('Sheet1');
+  var emailAddress = sheet1.getRange(startRow,1).getValue();
+  var emailSubject = sheet1.getRange(startRow,2).getValue();
+  var personOfInterest = sheet1.getRange(startRow,3).getValue();
+  var body = sheet1.getRange(2,4).getValue();
+
+
+  // finish from messsage
+  var message = 'Dear ' + personOfInterest + ', ' + '\n' + body + '\n' + 'From ';
+
+  MailApp.sendEmail(emailAddress, emailSubject, message);
+
+  startRow++
+}
+
+}
